@@ -161,7 +161,7 @@
           <li>Pricing</li>
           <li>Analytics</li>
           <li>FAQs</li>
-          <li class="sign-up-btn">Sign up for fee</li>
+          <button class="sign-up-btn">Sign up for fee</button>
         </ul>
       </div>
       <div class="scis-img">
@@ -437,7 +437,10 @@ footer {
     z-index: 333;
     border-radius: 0.3rem;
   }
-
+.selections button{
+  color: rgb(82, 82, 82);
+  
+}
   ul li {
     margin-top: 30px;
     display: block;

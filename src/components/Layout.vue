@@ -300,6 +300,7 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-inline: 0.5rem;
+  margin-top: 10px;
 }
 
 .selections {
@@ -342,8 +343,8 @@ footer {
   background-color: rgb(255, 156, 25);
   border: none;
   border-radius: 1rem;
-  padding-inline: 0.5rem;
-  padding-block: 0.9rem;
+  padding-inline: 0.4rem;
+  padding-block: 0.5rem;
   outline: none;
   cursor: pointer;
   color: #182025;

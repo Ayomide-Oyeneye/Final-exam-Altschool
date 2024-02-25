@@ -152,21 +152,21 @@
 <template>
   <!-- HEADER OF THE PAGE -->
   <header class="header">
-    <div class="scis-img">
-      <img src="../images/scissors-logo.png" alt="" srcset="">
-    </div>
     <div>
       <input type="checkbox" id="check">
       <label for="check" class="checkbtn"><img width="64" height="64" src="https://img.icons8.com/cotton/64/menu.png"
-          alt="menu" /></label>
-      <ul class="selections">
-        <li style="color: rgb(255, 156, 25);">My URLs</li>
-        <li>Pricing</li>
-        <li>Analytics</li>
-        <li>FAQs</li>
-        <li class="sign-up-btn">Sign up for fee</li>
-      </ul>
-    </div>
+        alt="menu" /></label>
+        <ul class="selections">
+          <li style="color: rgb(255, 156, 25);">My URLs</li>
+          <li>Pricing</li>
+          <li>Analytics</li>
+          <li>FAQs</li>
+          <li class="sign-up-btn">Sign up for fee</li>
+        </ul>
+      </div>
+      <div class="scis-img">
+        <img src="../images/scissors-logo.png" alt="" srcset="">
+      </div>
 
   </header>
   <div class="url-place">
@@ -422,10 +422,6 @@ footer {
 
 /* Media query for smartphones */
 @media screen and (max-width: 768px) {
-  body {
-
-    overflow: hidden;
-  }
 
   ul {
     position: absolute;
@@ -433,8 +429,8 @@ footer {
     padding-block-end: 1rem;
     background-color: #6C8B9F;
     top: 60px;
-    margin-inline-end: 0.5rem;
-    right: -200px;
+    margin-inline-start: 0.5rem;
+    left: -200px;
     /* Adjusted the value */
     display: flex;
     flex-direction: column;
@@ -452,7 +448,7 @@ footer {
   }
 
   #check:checked~ul {
-    right: 0;
+    left: 0;
     transition-duration: 1s;
   }
 

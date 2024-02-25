@@ -156,14 +156,17 @@
       <img src="../images/scissors-logo.png" alt="" srcset="">
     </div>
     <div>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn"><img width="64" height="64" src="https://img.icons8.com/cotton/64/menu.png" alt="menu"/></label>
       <ul class="selections">
         <li style="color: rgb(255, 156, 25);">My URLs</li>
         <li>Pricing</li>
         <li>Analytics</li>
         <li>FAQs</li>
-        <button class="sign-up-btn">Sign up for fee</button>
+        <li class="sign-up-btn">Sign up for fee</li>
       </ul>
     </div>
+
   </header>
   <div class="url-place">
 
@@ -268,12 +271,23 @@ export default {
   margin: 0;
   padding: 0;
 }
-.load-text{
+
+.load-text {
   padding: 10px;
   border-radius: 1rem;
   height: 6rem;
   width: 6rem;
 }
+
+.checkbtn {
+  cursor: pointer;
+  display: none;
+}
+
+#check {
+  display: none;
+}
+
 body {
   background-color: rgb(24, 32, 37);
   min-height: 100vh;
@@ -299,14 +313,11 @@ body {
 .url-place {
   display: flex;
   flex-direction: column;
-width: 100%; 
- justify-content: center;
-  margin: 100px auto;
-  /* Adjust width as needed */
+  width: 100%;
+  justify-content: center;
+  margin: 100px auto; /* Adjust width as needed */
   height: 200px;
 }
-
-
 
 footer {
   display: flex;
@@ -324,7 +335,6 @@ footer {
   padding: 0.5rem;
   border-radius: 2rem;
 }
-
 
 .sign-up-btn {
   font-size: 19.2px;
@@ -374,12 +384,11 @@ footer {
   font-weight: bolder;
   font-size: larger;
   background-color: #182025;
-  /* border: 2px solid rgb(109, 48, 252); */
   content: '';
   border: 3px solid transparent;
-  /* Initial border */
   animation: borderAnimation 8s linear infinite;
 }
+
 @keyframes borderAnimation {
   0% {
     border-color: rgb(255, 110, 26);
@@ -387,26 +396,54 @@ footer {
   5% {
     border-color: rgb(133, 26, 255);
   }
-
   25% {
     border-color: blue;
   }
-
   50% {
     border-color: rgb(109, 48, 252);
   }
-
   75% {
     border-color: orange;
   }
-
   100% {
     border-color: rgb(253, 117, 26);
   }
 }
-.extra-display{
+
+.extra-display {
   font-size: xx-large;
 }
+
+/* Media query for smartphones */
+@media screen and (max-width: 768px) {
+  ul {
+    position: absolute;
+    padding-inline: 1rem;
+    padding-block-end: 1rem;
+    background-color:  #6C8B9F;
+    top: 60px;
+    margin-inline-end: 0.5rem;
+    right: -200px;
+    /* Adjusted the value */
+    display: flex;
+    flex-direction: column;
+    z-index: 333;
+    border-radius: 0.3rem;
+  }
+  ul li {
+    margin-top: 30px;
+    display: block;
+  }
+  .checkbtn {
+    display: block;
+  }
+  #check:checked~ul {
+    right: 0;
+    transition-duration: 1s;
+  }
+}
+
+
 </style>
 
 

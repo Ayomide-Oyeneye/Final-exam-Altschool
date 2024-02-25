@@ -423,13 +423,19 @@ footer {
 
 /* Media query for smartphones */
 @media screen and (max-width: 768px) {
-
+*{
+  /* Text color */
+  
+  /* Stroke color */
+  -webkit-text-stroke: 1px rgb(100, 79, 128); /* For WebKit-based browsers like Chrome and Safari */
+  text-stroke: 1px black;
+}
   ul {
     position: absolute;
     padding-inline: 1rem;
     padding-block-end: 1rem;
     background-color: #6C8B9F;
-    top: 60px;
+    top: 70px;
     margin-inline-start: 0.5rem;
     left: -200px;
     /* Adjusted the value */

@@ -156,8 +156,9 @@
       <img src="../images/scissors-logo.png" alt="" srcset="">
     </div>
     <div>
-        <input type="checkbox" id="check">
-        <label for="check" class="checkbtn"><img width="64" height="64" src="https://img.icons8.com/cotton/64/menu.png" alt="menu"/></label>
+      <input type="checkbox" id="check">
+      <label for="check" class="checkbtn"><img width="64" height="64" src="https://img.icons8.com/cotton/64/menu.png"
+          alt="menu" /></label>
       <ul class="selections">
         <li style="color: rgb(255, 156, 25);">My URLs</li>
         <li>Pricing</li>
@@ -175,28 +176,27 @@
 
     <!-- SHORTNER-AREA-->
     <div class="shortner-area">
-          <div class="shortner">
-            <input type="url" v-model="longUrl" placeholder="paste in your urls">
-            <button @click="shortenUrl" :disabled="loading">Shorten URL</button>
-          </div>
-          <br>
-          <div class="extra-display">
-            <div class="load" v-if="loading"><img class="load-text" src="../images/icons8-loading-infinity.gif" alt=""></div>
-            <p v-else-if="shortenedUrl && !error">
-              <span class="url-div">
-                 Shortened URL:
-                 </span> 
-              <a :href="shortenedUrl" :style="{ color: '#36AE7C' }"
-                @click="handleShortenedUrlClick">{{ shortenedUrl }}
-              </a>
-                 <button @click="copyToClipboard(shortenedUrl)" class="copy-button">
-                  <img width="26" height="26" src="https://img.icons8.com/ios-filled/50/clipboard.png" alt="clipboard"/>
-                </button>
-            </p>
-            <div v-else-if="error">{{ error }}</div>
-          </div>
-        </div>
+      <div class="shortner">
+        <input type="url" v-model="longUrl" placeholder="paste in your urls">
+        <button @click="shortenUrl" :disabled="loading">Shorten URL</button>
+      </div>
+      <br>
+      <div class="extra-display">
+        <div class="load" v-if="loading"><img class="load-text" src="../images/icons8-loading-infinity.gif" alt=""></div>
+        <p v-else-if="shortenedUrl && !error">
+          <span class="url-div">
+            Shortened URL:
+          </span>
+          <a :href="shortenedUrl" :style="{ color: '#36AE7C' }" @click="handleShortenedUrlClick">{{ shortenedUrl }}
+          </a>
+          <button @click="copyToClipboard(shortenedUrl)" class="copy-button">
+            <img width="26" height="26" src="https://img.icons8.com/ios-filled/50/clipboard.png" alt="clipboard" />
+          </button>
+        </p>
+        <div v-else-if="error">{{ error }}</div>
+      </div>
     </div>
+  </div>
 
   <!-- FOOTER OF THE PAGE -->
   <footer class="footer">
@@ -315,7 +315,8 @@ body {
   flex-direction: column;
   width: 100%;
   justify-content: center;
-  margin: 100px auto; /* Adjust width as needed */
+  margin: 100px auto;
+  /* Adjust width as needed */
   height: 200px;
 }
 
@@ -393,18 +394,23 @@ footer {
   0% {
     border-color: rgb(255, 110, 26);
   }
+
   5% {
     border-color: rgb(133, 26, 255);
   }
+
   25% {
     border-color: blue;
   }
+
   50% {
     border-color: rgb(109, 48, 252);
   }
+
   75% {
     border-color: orange;
   }
+
   100% {
     border-color: rgb(253, 117, 26);
   }
@@ -416,11 +422,16 @@ footer {
 
 /* Media query for smartphones */
 @media screen and (max-width: 768px) {
+  body {
+
+    overflow: hidden;
+  }
+
   ul {
     position: absolute;
     padding-inline: 1rem;
     padding-block-end: 1rem;
-    background-color:  #6C8B9F;
+    background-color: #6C8B9F;
     top: 60px;
     margin-inline-end: 0.5rem;
     right: -200px;
@@ -430,23 +441,25 @@ footer {
     z-index: 333;
     border-radius: 0.3rem;
   }
+
   ul li {
     margin-top: 30px;
     display: block;
   }
+
   .checkbtn {
     display: block;
   }
+
   #check:checked~ul {
     right: 0;
     transition-duration: 1s;
   }
+
   #check~ul {
     transition-duration: 1s;
   }
 }
-
-
 </style>
 
 

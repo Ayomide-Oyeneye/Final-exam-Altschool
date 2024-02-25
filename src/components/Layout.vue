@@ -441,6 +441,9 @@ footer {
     right: 0;
     transition-duration: 1s;
   }
+  #check~ul {
+    transition-duration: 1s;
+  }
 }
 
 

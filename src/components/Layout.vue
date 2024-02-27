@@ -149,8 +149,8 @@
    -->
 <!-- 😎 -->
 
-<template>
-  <!-- HEADER OF THE PAGE -->
+<!-- <template>
+  <!-- HEADER OF THE PAGE
   <header class="header">
     <div>
       <input type="checkbox" id="check">
@@ -171,10 +171,10 @@
   </header>
   <div class="url-place">
 
-    <!-- CENTER TEXT -->
+    <!-- CENTER TEXT 
     <h1>Latest URLs</h1>
 
-    <!-- SHORTNER-AREA-->
+    <!-- SHORTNER-AREA
     <div class="shortner-area">
       <div class="shortner">
         <input type="url" v-model="longUrl" placeholder="paste in your urls">
@@ -198,7 +198,7 @@
     </div>
   </div>
 
-  <!-- FOOTER OF THE PAGE -->
+  <!-- FOOTER OF THE PAGE 
   <footer class="footer">
     <p>Term of Service | Security | 2024 Scissors</p>
     <div class="footer-img">
@@ -263,8 +263,117 @@ export default {
     }
   }
 };
-</script>
+</script> -->
+<template>
+  <!-- HEADER OF THE PAGE -->
+  <header class="header">
+    <div>
+      <input type="checkbox" id="check">
+      <label for="check" class="checkbtn"><img width="64" height="64" src="https://img.icons8.com/cotton/64/menu.png"
+          alt="menu" /></label>
+      <ul class="selections">
+        <li style="color: rgb(255, 156, 25);">My URLs</li>
+        <li>Pricing</li>
+        <li>Analytics</li>
+        <li>FAQs</li>
+        <button class="sign-up-btn">Sign up for fee</button>
+      </ul>
+    </div>
+    <div class="scis-img">
+      <img src="../images/scissors-logo.png" alt="" srcset="">
+    </div>
 
+  </header>
+  <div class="url-place">
+
+    <!-- CENTER TEXT -->
+    <h1>Latest URLs</h1>
+
+    <!-- SHORTNER-AREA-->
+    <div class="shortner-area">
+      <div class="shortner">
+        <input type="url" v-model="originalUrl" placeholder="paste in your urls">
+        <button @click="shortenUrl" :disabled="loading">Shorten URL</button>
+      </div>
+      <br>
+      <div class="extra-display">
+        <div class="load" v-if="loading"><img class="load-text" src="../images/icons8-loading-infinity.gif" alt=""></div>
+        <p v-else-if="shortenedUrl && !error">
+          <span class="url-div">
+            Shortened URL:
+          </span>
+          <a :href="shortenedUrl" :style="{ color: '#36AE7C' }" @click="handleShortenedUrlClick">{{ shortenedUrl }}
+          </a>
+          <button @click="copyToClipboard(shortenedUrl)" class="copy-button">
+            <img width="26" height="26" src="https://img.icons8.com/ios-filled/50/clipboard.png" alt="clipboard" />
+          </button>
+        </p>
+        <div v-else-if="error">{{ error }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER OF THE PAGE -->
+  <footer class="footer">
+    <p>Term of Service | Security | 2024 Scissors</p>
+    <div class="footer-img">
+      <img src="../images/i.fi-social-facebook.png" alt="">
+      <img src="../images/i.fi-social-twitter.png" alt="">
+      <img src="../images/i.fi-social-linkedin.png" alt="">
+      <img src="../images/svg.feather.png" alt="">
+    </div>
+  </footer>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      originalUrl: '', // Changed from longUrl to originalUrl
+      shortenedUrl: '',
+      errorMessage: '',
+      loading: false
+    };
+  },
+  methods: {
+    shortenUrl() {
+      this.loading = true; // Set loading state to true before making the request
+      fetch('https://api.rebrandly.com/v1/links', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': '93aabfca8d77470889a4439b80a1ef9f'
+        },
+        body: JSON.stringify({
+          destination: this.originalUrl
+        })
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to shorten URL');
+          }
+          return response.json();
+        })
+        .then(data => {
+          this.shortenedUrl = data.shortUrl;
+        })
+        .catch(error => {
+          this.errorMessage = error.message;
+        })
+        .finally(() => {
+          this.loading = false; // Set loading state back to false after request completes
+        });
+    },
+    copyToClipboard(text) {
+      const input = document.createElement('input');
+      input.value = text;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+    }
+  }
+};
+</script>
 <style>
 * {
   color: white;
@@ -423,13 +532,15 @@ footer {
 
 /* Media query for smartphones */
 @media screen and (max-width: 768px) {
-*{
-  /* Text color */
-  
-  /* Stroke color */
-  -webkit-text-stroke: 1px rgb(100, 79, 128); /* For WebKit-based browsers like Chrome and Safari */
-  text-stroke: 1px black;
-}
+  * {
+    /* Text color */
+
+    /* Stroke color */
+    -webkit-text-stroke: 1px rgb(100, 79, 128);
+    /* For WebKit-based browsers like Chrome and Safari */
+    text-stroke: 1px black;
+  }
+
   ul {
     position: absolute;
     padding-inline: 1rem;
@@ -444,10 +555,12 @@ footer {
     z-index: 333;
     border-radius: 0.3rem;
   }
-.selections button{
-  color: rgb(82, 82, 82);
-  
-}
+
+  .selections button {
+    color: rgb(82, 82, 82);
+
+  }
+
   ul li {
     margin-top: 30px;
     display: block;

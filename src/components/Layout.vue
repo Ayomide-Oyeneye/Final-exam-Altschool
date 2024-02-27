@@ -270,18 +270,18 @@ export default {
     <div>
       <input type="checkbox" id="check">
       <label for="check" class="checkbtn"><img width="64" height="64" src="https://img.icons8.com/cotton/64/menu.png"
-          alt="menu" /></label>
-      <ul class="selections">
-        <li style="color: rgb(255, 156, 25);">My URLs</li>
-        <li>Pricing</li>
-        <li>Analytics</li>
-        <li>FAQs</li>
-        <button class="sign-up-btn">Sign up for fee</button>
-      </ul>
-    </div>
-    <div class="scis-img">
-      <img src="../images/scissors-logo.png" alt="" srcset="">
-    </div>
+        alt="menu" /></label>
+        <ul class="selections">
+          <li style="color: rgb(255, 156, 25);">My URLs</li>
+          <li>Pricing</li>
+          <li>Analytics</li>
+          <li>FAQs</li>
+          <button class="sign-up-btn">Sign up for fee</button>
+        </ul>
+      </div>
+      <div class="scis-img">
+        <img src="../images/scissors-logo.png" alt="" srcset="">
+      </div>
 
   </header>
   <div class="url-place">
@@ -341,27 +341,27 @@ export default {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'apikey': '93aabfca8d77470889a4439b80a1ef9f'
+          'apikey': 'a59cbcd4c3254c8ebc4b165de6611a1b'
         },
         body: JSON.stringify({
           destination: this.originalUrl
         })
       })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Failed to shorten URL');
-          }
-          return response.json();
-        })
-        .then(data => {
-          this.shortenedUrl = data.shortUrl;
-        })
-        .catch(error => {
-          this.errorMessage = error.message;
-        })
-        .finally(() => {
-          this.loading = false; // Set loading state back to false after request completes
-        });
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to shorten URL');
+        }
+        return response.json();
+      })
+      .then(data => {
+        this.shortenedUrl = data.shortUrl;
+      })
+      .catch(error => {
+        this.errorMessage = error.message;
+      })
+      .finally(() => {
+        this.loading = false; // Set loading state back to false after request completes
+      });
     },
     copyToClipboard(text) {
       const input = document.createElement('input');
@@ -374,6 +374,11 @@ export default {
   }
 };
 </script>
+
+<style>
+/* Your CSS styles */
+</style>
+
 <style>
 * {
   color: white;
@@ -630,4 +635,3 @@ footer {
     }
   };
   </script> -->
-  

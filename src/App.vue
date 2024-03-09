@@ -27,7 +27,9 @@
           </router-link>
         </li>
         <!-- SIGNUP BUTTON -->
-        <button class="sign-up-btn">Sign up for free</button>
+        <button class="sign-up-btn"><router-link class="linksto home" to="/Signup">
+          Sign up for free
+          </router-link></button>
       </ul>
     </div>
     <div class="scis-img">

@@ -1,8 +1,8 @@
 <template>
     <div class="mainpage">
-      <h1>Error!</h1>
-      <h1>404</h1>
-      <h1>Page not found</h1>
+     <img class="four" src="../images/404 Error with a cute animal.gif" alt="" srcset="">
+     
+      <h1>Page not found... 😥😥</h1>
     </div>
     <button><router-link class="linksto home" to="/">
         return to home page 👈
@@ -17,8 +17,12 @@
   </script>
   
   <style scoped>
+  h1{
+    color: #ff3300;
+  }
   .mainpage {
     margin-top: 150px;
+    margin-top: 0;
   }
   button{
     width: fit-content;
@@ -33,6 +37,10 @@
     font-weight: bolder;
     padding: 0.5rem;
     color: rgb(58, 75, 70);
+  }
+  .four{
+    margin: 0;
+    width: 300px;
   }
   </style>
   

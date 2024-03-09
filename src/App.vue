@@ -8,7 +8,7 @@
       </label>
       <ul class="selections">
         <li style="color: rgb(255, 156, 25);">
-          <router-link style="color: rgb(255, 156, 25);" to="/">My
+          <router-link class="linksto home" style="color: rgb(255, 156, 25);" to="/">My
             URLs</router-link>
         </li>
         <li>
@@ -17,11 +17,13 @@
           </router-link>
         </li>
         <li>
-          Analytics
-        </li>
-        <li>
           <router-link class="linksto home" to="/FAQ">
             FAQS
+          </router-link>
+        </li>
+        <li>
+          <router-link class="linksto home" to="/About">
+            About
           </router-link>
         </li>
         <!-- SIGNUP BUTTON -->

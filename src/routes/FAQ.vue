@@ -191,6 +191,7 @@ export default {
   margin: 0 auto;
   text-align: left;
   width: 70%;
+  padding: 10px;
   transition-duration: 3s;
   color: orange;
 }

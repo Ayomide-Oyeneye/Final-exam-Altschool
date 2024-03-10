@@ -30,6 +30,9 @@
         <button class="sign-up-btn"><router-link class="linksto home" to="/Signup">
           Sign up for free
           </router-link></button>
+          <button class="sign-up-btn log"><router-link class="linksto home" to="/login">
+          Login
+          </router-link></button>
       </ul>
     </div>
     <div class="scis-img">

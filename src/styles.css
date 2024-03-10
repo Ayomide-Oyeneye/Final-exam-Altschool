@@ -258,3 +258,10 @@ footer {
   margin-inline-start: 1rem;
 
 }
+.log{
+
+  background-color: azure;
+}
+.log .home{
+  color: rgb(255, 156, 25);
+}

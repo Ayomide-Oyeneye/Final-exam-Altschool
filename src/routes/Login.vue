@@ -1,154 +1,185 @@
 <template>
-    <div class="login-container">
-      <form @submit.prevent="submitForm" class="login-form">
-        <h2>Login</h2>
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input type="text" id="username" v-model="username" required>
-        </div>
-  
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" id="password" v-model="password" required>
-        </div>
-  
-        <button type="submit">Login</button>
-      </form>
-  
-      <p v-if="errorMessage" class="error-message" :class="{ 'fade-in-out': errorMessage }">{{ errorMessage }}</p>
-      <p v-if="successMessage" class="success-message" :class="{ 'fade-in-out': successMessage }">{{ successMessage }}</p>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        username: '',
-        password: '',
-        errorMessage: '',
-        successMessage: ''
-      };
-    },
-    methods: {
-      submitForm() {
-        // Simple validation
-        if (!this.username || !this.password) {
-          this.errorMessage = 'Please fill in all fields.';
-          this.resetMessages();
-          return;
-        }
-  
-        // Here you would typically make an AJAX request to your backend to authenticate the user
-        // For the sake of this example, let's just pretend the login was successful
-        // You can replace this with actual API calls
+  <div class="login-container">
+    <form @submit.prevent="login" class="login-form">
+      <h2>Login</h2>
+      <div class="form-group">
+        <label for="email"></label>
+        <input type="email" id="email" v-model="email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password"></label>
+        <input type="password" id="password" v-model="password" placeholder="Enter your password" required>
+      </div>
+
+      <button type="submit">Login</button>
+      <p class="or"><span>or</span></p>
+      <p class="all">
+       No account?
+       <router-link class="linksto home" to="/Signup">
+        Sign Up
+        </router-link></p>
+    </form>
+
+    <p v-if="errorMessage || successMessage" class="fade-in-out" :class="{ 'error-message': errorMessage, 'success-message': successMessage }">{{ errorMessage || successMessage }}</p>
+  </div>
+</template>
+
+<script>
+import { ref } from 'vue';
+import { auth, signInWithEmailAndPassword } from "../firebase/index.js";
+import router from "../router/index.js";
+
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+      errorMessage: '',
+      successMessage: '',
+    };
+  },
+  methods: {
+    async login() {
+      try {
+        await signInWithEmailAndPassword(auth, this.email, this.password);
         this.successMessage = 'Login successful!';
         this.resetMessages();
-  
-        // Reset form fields
-        this.username = '';
+        this.email = '';
         this.password = '';
-      },
-      resetMessages() {
         setTimeout(() => {
-          this.errorMessage = '';
-          this.successMessage = '';
-        }, 3000);
+          router.push('/Home');
+      }, 2000);
+      } catch (error) {
+        console.error(error);
+        this.errorMessage = 'Invalid email or password.';
+        this.resetMessages();
       }
-    }
-  };
-  </script>
-  
-  <style scoped>
-  * {
-    color: black;
+    },
+    resetMessages() {
+      setTimeout(() => {
+        this.errorMessage = '';
+        this.successMessage = '';
+      }, 3000);
+    },
   }
-  
-  .login-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+};
+</script>
+
+<style scoped>
+/* Styles remain the same */
+</style>
+
+
+<style scoped>
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-form {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 2px 3px 10px 0px rgba(0, 0, 0, 0.5);
+  outline: none;
+  background-color: transparent;
+  border-radius: 4px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #705b51;
+  color: #fff;
+  font-weight: bolder;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #554b3a;
+}
+
+.error-message, .success-message {
+  text-align: center;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.error-message {
+  background-color: #ffcdd2;
+  color: #c62828;
+}
+
+.success-message {
+  background-color: #c8e6c9;
+  color: #2e7d32;
+}
+
+.fade-in-out {
+  animation: fade 2s ease-in-out;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
   }
-  
-  .login-form {
-    background-color: #f5f5f5;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 100%;
+  25% {
+    opacity: 1;
   }
-  
-  .login-form h2 {
-    text-align: center;
-    margin-bottom: 20px;
+  75% {
+    opacity: 1;
   }
-  
-  .form-group {
-    margin-bottom: 15px;
+  100% {
+    opacity: 2;
   }
-  
-  .form-group label {
-    font-weight: bold;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  .error-message, .success-message {
-    text-align: center;
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 4px;
-  }
-  
-  .error-message {
-    background-color: #ffcdd2;
-    color: #c62828;
-  }
-  
-  .success-message {
-    background-color: #c8e6c9;
-    color: #2e7d32;
-  }
-  
-  .fade-in-out {
-    animation: fade 2s ease-in-out;
-  }
-  
-  @keyframes fade {
-    0% {
-      opacity: 0;
-    }
-    25% {
-      opacity: 1;
-    }
-    75% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
-  </style>
-  
+}
+.all{
+  margin-top: 1rem;
+}
+.all .linksto{
+  color: #1900ff;
+  font-weight: bolder;
+}
+.or{
+   width: 100%; 
+   text-align: center; 
+   border-bottom: 1px solid #4e4c4c; 
+   line-height: 0.1em;
+   margin: 10px 0 20px; 
+  } 
+  .or span { 
+  color: #4e4c4c;
+  font-weight: bolder;
+    background:#F5F5F5; 
+    padding:0 10px; 
+}
+</style>

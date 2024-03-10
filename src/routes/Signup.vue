@@ -3,36 +3,42 @@
     <form @submit.prevent="submitForm" class="signup-form">
       <h2>Sign Up</h2>
       <div class="form-group">
-        <label for="username">Username:</label>
-        <input type="text" id="username" v-model="username" required>
+        <label for="username"></label>
+        <input type="text" id="username" v-model="username" placeholder="Username" required>
       </div>
 
       <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" v-model="email" required>
+        <label for="email"></label>
+        <input type="email" id="email" placeholder="E-mail" v-model="email" required>
       </div>
 
       <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" v-model="password" required @input="checkPasswordStrength">
+        <label for="password"></label>
+        <input type="password" placeholder="Password" id="password" v-model="password" required @input="checkPasswordStrength">
         <p v-if="passwordStrengthMessage" class="password-strength">{{ passwordStrengthMessage }}</p>
       </div>
 
       <div class="form-group">
-        <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" id="confirmPassword" v-model="confirmPassword" required>
+        <label for="confirmPassword"></label>
+        <input type="password" placeholder="Confirm password" id="confirmPassword" v-model="confirmPassword" required>
       </div>
 
-      <button type="submit">Sign Up</button>
-    </form>
-
+      <button type="submit" >Sign up</button>
+      <p class="or"><span>or</span></p>
+      <p class="google" @click="SignInWithGoogle"><img width="50" height="50" src="https://img.icons8.com/bubbles/50/google-logo.png" alt="google-logo"/> <h4>Signup with Google</h4></p>
+     <p class="all">
+       i already have an account?
+       <router-link class="linksto home" to="/login">
+        Login
+        </router-link></p>
+      </form>
     <p v-if="errorMessage || successMessage" class="fade-in-out" :class="{ 'error-message': errorMessage, 'success-message': successMessage }">{{ errorMessage || successMessage }}</p>
   </div>
-</template>
-
+  <router-view></router-view>
+</template>uth
 <script>
-import { useRouter } from "vue-router";
-import { auth, createUserWithEmailAndPassword } from "../firebase/index.js";
+import { auth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "../firebase/index.js";
+import router from "../router/index.js";
 
 export default {
   data() {
@@ -43,7 +49,7 @@ export default {
       confirmPassword: '',
       errorMessage: '',
       successMessage: '',
-      passwordStrengthMessage: ''
+      passwordStrengthMessage: '',
     };
   },
   methods: {
@@ -71,8 +77,9 @@ export default {
           this.email = '';
           this.password = '';
           this.confirmPassword = '';
-          const router = useRouter();
-          router.push('/');
+          setTimeout(() => {
+            router.push('/Home');
+          }, 2000);
         })
         .catch((error) => {
           if (error.code === 'auth/email-already-in-use') {
@@ -80,6 +87,17 @@ export default {
           } else {
             console.log(error.code);
           }
+        });
+    },
+    SignInWithGoogle() {
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          console.log(result.user);
+          router.push('/Home');
+        })
+        .catch((error) => {
+          console.error(error.message);
         });
     },
     resetMessages() {
@@ -111,12 +129,9 @@ export default {
     }
   }
 };
+
+
 </script>
-
-<style scoped>
-/* Your CSS styles remain unchanged */
-</style>
-
 
 <style scoped>
 * {
@@ -129,6 +144,7 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  border: 2px solid;
 }
 
 .signup-form {
@@ -154,9 +170,12 @@ export default {
 }
 
 .form-group input {
-  width: 100%;
+  width: 80%;
   padding: 10px;
   border: 1px solid #ccc;
+  box-shadow: 2px 3px 10px 0px rgba(0, 0, 0, 0.5);
+  outline: none;
+  background-color: transparent;
   border-radius: 4px;
 }
 
@@ -164,14 +183,15 @@ button {
   width: 100%;
   padding: 10px;
   border: none;
-  background-color: #007bff;
+  background-color: #705b51;
   color: #fff;
+  font-weight: bolder;
   border-radius: 4px;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #554b3a;
 }
 
 .error-message, .success-message {
@@ -208,5 +228,43 @@ button:hover {
   100% {
     opacity: 2;
   }
+}
+.out{
+  width: 70%;
+  margin-top: 10px;
+  background-color: red;
+}
+.all{
+  margin-top: 1rem;
+}
+.all .linksto{
+  color: #1900ff;
+  font-weight: bolder;
+}
+.google{
+  display: flex;
+  align-items: center;
+  border: 1px solid grey;
+  width: 70%;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+  background-color: rgb(255, 244, 209,0.8);
+  
+}
+.google h4{
+  color: rgb(66, 57, 59);
+  font-weight: bolder;
+  margin-left:18px;
+}
+.or{
+   width: 100%; 
+   text-align: center; 
+   border-bottom: 1px solid #4e4c4c; 
+   line-height: 0.1em;
+   margin: 10px 0 20px; 
+} 
+.or span { 
+    background:#fff; 
+    padding:0 10px; 
 }
 </style>

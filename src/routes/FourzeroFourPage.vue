@@ -4,7 +4,7 @@
      
       <h1>Page not found... 😥😥</h1>
     </div>
-    <button><router-link class="linksto home" to="/">
+    <button><router-link class="linksto home" to="/Home">
         return to home page 👈
           </router-link></button>
     <router-view></router-view>

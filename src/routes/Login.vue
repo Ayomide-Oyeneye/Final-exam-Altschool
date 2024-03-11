@@ -81,8 +81,6 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 70%;
-  margin: 0 auto;
 }
 
 .login-form {
@@ -91,7 +89,8 @@ export default {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-  width: 50%;
+  max-width: 400px;
+  width: 70%;
 }
 
 .login-form h2 {
@@ -187,15 +186,5 @@ button:hover {
     background:#F5F5F5; 
     padding:0 10px; 
 }
-@media screen and (max-width: 768px) {
-  .login-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 80%;
-  margin: 0 auto;
-}
-}
+
 </style>

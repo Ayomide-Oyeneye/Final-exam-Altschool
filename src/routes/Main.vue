@@ -8,7 +8,7 @@
     <router-view></router-view>
 </template>
 <script>
- import router from "../router/index.js";
+ import router from "../router/index.ts";
 export default {
   name: 'main'
 }

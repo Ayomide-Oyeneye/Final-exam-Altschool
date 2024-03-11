@@ -27,8 +27,8 @@
 
 <script>
 import { ref } from 'vue';
-import { auth, signInWithEmailAndPassword } from "../firebase/index.js";
-import router from "../router/index.js";
+import { auth, signInWithEmailAndPassword } from "../firebase/index.ts";
+import router from "../router/index.ts";
 
 export default {
   data() {

@@ -49,8 +49,8 @@
 <script>
 import { onMounted, ref } from 'vue';
 import Home from './routes/Home.vue';
-import { auth, onAuthStateChanged, signOut } from "./firebase/index.js";
-import router from "./router/index.js";
+import { auth, onAuthStateChanged, signOut } from "./firebase";
+import router from "./router";
 
 export default {
   name: 'App',
@@ -76,5 +76,3 @@ export default {
   }
 };
 </script>
-
-

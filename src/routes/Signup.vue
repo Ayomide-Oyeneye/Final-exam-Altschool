@@ -38,8 +38,8 @@
   <router-view></router-view>
 </template>uth
 <script>
-import { auth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "../firebase/index.js";
-import router from "../router/index.js";
+import { auth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "../firebase/index.ts";
+import router from "../router/index.ts";
 
 export default {
   data() {

@@ -14,7 +14,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
-} from "../firebase/index.js";
+} from "../firebase";
 import FourzeroFourPage from "../routes/FourzeroFourPage.vue";
 import { createRouter, createWebHistory } from "vue-router";
 

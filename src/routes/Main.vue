@@ -1,9 +1,9 @@
 <template>
     <div class="main">
         <p>Wellcome to my Url Shortener website 😁</p>
-        <p>To get started click <span><router-link class="linksto home" to="/Signup">
+        <p>To get started click <span><router-link class="linksto home" to="/Home">
             here
-          </router-link></span> to sign up </p>
+          </router-link></span> to get started </p>
     </div>
     <router-view></router-view>
 </template>

@@ -4,6 +4,7 @@ import { Promise } from "core-js"; // Import the Promise module from core-js
 import "../styles.css";
 import Home from "../routes/Home.vue";
 import FAQ from "../routes/FAQ.vue";
+import Main from "../routes/Main.vue";
 import About from "../routes/About.vue";
 import Signup from "../routes/Signup.vue";
 import Login from "../routes/Login.vue";
@@ -30,7 +31,7 @@ const router = createRouter({
       },
     },
     { path: "/About", component: About },
-    { path: "/", component: App },
+    { path: "/", component: Main },
     { path: "/Signup", component: Signup },
     { path: "/login", component: Login },
     { path: "/:pathMatch(.*)*", component: FourzeroFourPage },

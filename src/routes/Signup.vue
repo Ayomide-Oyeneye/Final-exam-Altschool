@@ -1,5 +1,6 @@
 <template>
   <div class="signup-container">
+    <h1>Signup to gain access</h1>
     <form @submit.prevent="submitForm" class="signup-form">
       <h2>Sign Up</h2>
       <div class="form-group">
@@ -139,7 +140,11 @@ export default {
   margin: 0;
   padding: 0;
 }
+h1{
+  color: #d7bef8;
+  margin-block: 1rem;
 
+}
 .signup-container {
   display: flex;
   flex-direction: column;

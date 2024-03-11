@@ -1,0 +1,29 @@
+<template>
+    <div class="main">
+        <p>Wellcome to my Url Shortener website 😁</p>
+        <p>To get started click <span><router-link class="linksto home" to="/Signup">
+            here
+          </router-link></span> to sign up </p>
+    </div>
+    <router-view></router-view>
+</template>
+<script>
+ import router from "../router/index.js";
+export default {
+  name: 'main'
+}
+</script>
+<style>
+span .linksto{
+    color: aqua;
+    width: fit-content;
+    text-decoration: underline;
+}
+.main> :first-child{
+    font-size: xxx-large;
+    margin-top: 50px;
+}
+.main>:nth-child(2){
+    font-size: xxx-large;
+}
+</style>

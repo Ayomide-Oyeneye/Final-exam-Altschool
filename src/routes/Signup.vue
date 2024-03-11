@@ -134,8 +134,10 @@ export default {
 </script>
 
 <style scoped>
-* {
-  color: black;
+*{
+  color: #4e4c4c;
+  margin: 0;
+  padding: 0;
 }
 
 .signup-container {
@@ -144,7 +146,6 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  border: 2px solid;
 }
 
 .signup-form {
@@ -153,7 +154,7 @@ export default {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   max-width: 400px;
-  width: 100%;
+  width: 70%;
 }
 
 .signup-form h2 {
@@ -264,7 +265,7 @@ button:hover {
    margin: 10px 0 20px; 
 } 
 .or span { 
-    background:#fff; 
+  background:#F5F5F5; 
     padding:0 10px; 
 }
 </style>

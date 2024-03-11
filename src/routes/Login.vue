@@ -72,12 +72,17 @@ export default {
 
 
 <style scoped>
+*{
+  color: #4e4c4c;
+}
 .login-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 70%;
+  margin: 0 auto;
 }
 
 .login-form {
@@ -85,8 +90,8 @@ export default {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  width: 100%;
+
+  width: 50%;
 }
 
 .login-form h2 {
@@ -181,5 +186,16 @@ button:hover {
   font-weight: bolder;
     background:#F5F5F5; 
     padding:0 10px; 
+}
+@media screen and (max-width: 768px) {
+  .login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 80%;
+  margin: 0 auto;
+}
 }
 </style>

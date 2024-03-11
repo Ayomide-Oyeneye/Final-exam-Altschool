@@ -31,7 +31,7 @@
             Sign up for free
           </router-link>
         </button>
-        <button v-if="!isLoggedin" class="sign-up-btn log">
+        <button v-if="!isLoggedin" class="sign-up-btn ">
           <router-link class="linksto home" to="/login">
             Login
           </router-link>
@@ -62,7 +62,7 @@ export default {
 
     const handleSignOut = () => {
       signOut(auth).then(() => {
-        router.push('/FAQ');
+        router.push('/Login');
       });
     };
 

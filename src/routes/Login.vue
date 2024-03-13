@@ -13,7 +13,8 @@
       </div>
 
       <button type="submit">Login</button>
-      <p class="or"><span>or</span></p>
+      <p class="or"></p>
+      <p class="ors">or</p>
       <p class="all">
        No account?
        <router-link class="linksto home" to="/Signup">
@@ -66,9 +67,7 @@ export default {
 };
 </script>
 
-<style scoped>
-/* Styles remain the same */
-</style>
+
 
 
 <style scoped>
@@ -178,13 +177,16 @@ button:hover {
    text-align: center; 
    border-bottom: 1px solid #4e4c4c; 
    line-height: 0.1em;
-   margin: 10px 0 20px; 
-  } 
-  .or span { 
-  color: #4e4c4c;
-  font-weight: bolder;
-    background:#F5F5F5; 
-    padding:0 10px; 
+   margin: 0 auto;
+   margin-top: 10px; 
+   width: 90%;
+} 
+.ors { 
+  background-color:#F5F5F5;
+  padding: 5px 10px;
+  width: fit-content;
+  margin: 0 auto;
+    margin-top: -15px;
 }
 
 </style>

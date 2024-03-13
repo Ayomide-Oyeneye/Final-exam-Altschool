@@ -61,7 +61,7 @@ body {
 .selections li .linksto::after{
   content: "";
   position: absolute;
-  background-color: rgb(63, 52, 158);
+  background-color: rgb(40, 173, 129);
   border-radius: 0.5rem;
   height: 3px;
   width:0 ;
@@ -185,7 +185,18 @@ footer {
   align-items: center;
   overflow-y: auto;
 }
-
+.extra-display p{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.click-area{
+  display: flex;
+  width: 70%;
+  align-items: center;
+  margin-top: 10px;
+}
 /* Media query for smartphones */
 @media screen and (max-width: 908px) {
   * {

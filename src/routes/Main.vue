@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <p>Wellcome to my Url Shortener website 😁</p>
-        <p>To get started click <span><router-link class="linksto home" to="/Home">
+        <p>To get started click <span><router-link class="linksto home " to="/Home">
             here
           </router-link></span> to get started </p>
     </div>
@@ -14,10 +14,13 @@ export default {
 }
 </script>
 <style>
+p{
+    padding: 1rem;
+}
 span .linksto{
     color: aqua;
     width: fit-content;
-    text-decoration: underline;
+    text-decoration: aqua underline;
 }
 .main> :first-child{
     font-size: xxx-large;
@@ -25,5 +28,6 @@ span .linksto{
 }
 .main>:nth-child(2){
     font-size: xxx-large;
+    margin-top: -10px;
 }
 </style>

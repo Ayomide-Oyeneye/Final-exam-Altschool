@@ -184,6 +184,10 @@ footer {
   justify-content: center;
   align-items: center;
   overflow-y: auto;
+  background-color: #f0efeb;
+  width: 60%;
+  margin: 0 auto;
+  border-radius: 0.5rem;
 }
 .extra-display p{
   display: flex;
@@ -193,7 +197,7 @@ footer {
 }
 .click-area{
   display: flex;
-  width: 70%;
+  width: fit-content;
   align-items: center;
   margin-top: 10px;
 }
@@ -245,6 +249,16 @@ footer {
   #check~ul {
     transition-duration: 1s;
   }
+  .extra-display {
+    font-size: xx-large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    background-color: #f0efeb;
+    width: 100%;
+    border-radius: 0.5rem;
+  }
 }
 
 .qr-code-container {
@@ -261,13 +275,35 @@ footer {
 }
 
 .copy-button {
+  display: flex;
   height: 3rem;
-  width: 3rem;
+  align-items: center;
+  font-size: large;
+  font-weight: bolder;
+  padding-inline: 0.5rem;
   background-color: #0191CD;
   border: 2px solid #404346;
   border-radius: 0.6rem;
   margin-inline-start: 1rem;
-
+ cursor: pointer;
+ margin-inline-end: 10px;
+}
+.copy-button2 {
+  display: flex;
+  height: 3rem;
+  align-items: center;
+  font-size: large;
+  font-weight: bolder;
+  padding-inline: 0.5rem;
+  background-color: #01cd78;
+  border: 2px solid #5f4f3e;
+  border-radius: 0.6rem;
+  margin-inline-start: 1rem;
+ cursor: pointer;
+ color: #f7e0af;
+}
+.copy-button2 img{
+  margin-inline-end: 5px;
 }
 .log{
 
@@ -284,4 +320,23 @@ footer {
   padding-block: 0.3rem;
   cursor: pointer;
   border-radius: 1rem 10rem 1rem 10rem;
+}
+.url-link-2{
+  display:flex;
+  width: 90%;
+  flex-direction: column;
+}
+.url-div{
+  color: black;
+  display: flex;
+  justify-content: flex-start;
+}
+.url-fetch{
+  border: 1px solid grey;
+  width: 100%;
+  padding-block: 0.2rem;
+  font-size: small;
+  padding-inline: 1rem;
+  border-radius: 0.5rem;
+  margin-block-end: 10px;
 }

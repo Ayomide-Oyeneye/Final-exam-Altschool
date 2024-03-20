@@ -8,8 +8,8 @@
         <input type="url" v-model="longUrl" placeholder="Paste in your URLs">
         <button @click="shortenUrl" :disabled="loading">Shorten URL</button>
       </div>
-  <!-- CUSTOM URL FINALLY -->
-  <div v-if="shortenedUrl" class="custom">
+      <!-- CUSTOM URL FINALLY -->
+      <div v-if="shortenedUrl" class="custom">
         <input type="text" v-model="customAlias" placeholder="Customize-URL (optional)">
         <button @click="generateAlias" :disabled="loading">Generate Alias</button>
       </div>
@@ -20,31 +20,32 @@
 
         <!-- Display shortened URL -->
         <p v-else-if="shortenedUrl && !error">
-          <div class="url-link-2">
-            <span class="url-div">
-              <img width="42" height="42" src="https://img.icons8.com/cute-clipart/32/link.png" alt="Link" /> Shortened URL:
-            </span>
-            <a class="url-fetch" :href="shortenedUrl" :style="{ color: '#36AE7C', fontSize: 'xx-large' }"
-              @click="handleShortenedUrlClick">{{ shortenedUrl }}</a>
+        <div class="url-link-2">
+          <span class="url-div">
+            <img width="42" height="42" src="https://img.icons8.com/cute-clipart/32/link.png" alt="Link" /> Shortened
+            URL:
+          </span>
+          <a class="url-fetch" :href="shortenedUrl" :style="{ color: '#36AE7C', fontSize: 'xx-large' }"
+            @click="handleShortenedUrlClick">{{ shortenedUrl }}</a>
+        </div>
+        <!-- QR Code and other options -->
+        <div class="click-area">
+          <a class="copy-button2" :href="shortenedUrl">
+            <img width="38" height="38" src="https://img.icons8.com/clouds/32/domain.png" alt="Domain" /> Visit URL
+          </a>
+          <button @click="copyToClipboard(shortenedUrl)" class="copy-button">
+            <img width="26" height="26" src="https://img.icons8.com/ios-filled/50/clipboard.png" alt="Clipboard" /> Copy
+          </button>
+          <div class="qr-code-container">
+            <img :src="`https://api.qrserver.com/v1/create-qr-code/?data=${shortenedUrl}&size=63x63`" alt="QR Code">
           </div>
-          <!-- QR Code and other options -->
-          <div class="click-area">
-            <a class="copy-button2" :href="shortenedUrl">
-              <img width="38" height="38" src="https://img.icons8.com/clouds/32/domain.png" alt="Domain" /> Visit URL
-            </a>
-            <button @click="copyToClipboard(shortenedUrl)" class="copy-button">
-              <img width="26" height="26" src="https://img.icons8.com/ios-filled/50/clipboard.png" alt="Clipboard" /> Copy
-            </button>
-            <div class="qr-code-container">
-              <img :src="`https://api.qrserver.com/v1/create-qr-code/?data=${shortenedUrl}&size=63x63`" alt="QR Code">
-            </div>
-          </div>
+        </div>
         </p>
 
         <!-- Display error message if any -->
         <div class="general_error" v-else-if="error">{{ error }}</div>
       </div>
-      
+
     </div>
   </div>
 </template>
@@ -139,7 +140,7 @@ export default {
     },
     handleShortenedUrlClick() {
       // Handle the click event for the shortened URL
-      // You can add any other logic here
+      // You can add any other logic here😪
     },
     copyToClipboard(url) {
       const input = document.createElement('input');
@@ -159,8 +160,3 @@ export default {
   }
 };
 </script>
-<!--   CUSTOM URL FINALLY 
-<div v-if="shortenedUrl" class="custom">
-  <input type="text" v-model="customAlias" placeholder="Customize-URL (optional)">
-  <button @click="generateAlias" :disabled="loading">Generate Alias</button>
-</div> -->

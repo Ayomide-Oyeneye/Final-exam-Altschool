@@ -101,7 +101,7 @@ border-radius: 2rem;
 
 .sign-up-btn {
 font-size: 19.2px;
-background-color: rgb(255, 156, 25);
+background: linear-gradient(to left,#fdc478,#89a8fd);
 border: none;
 border-radius: 1rem;
 padding-inline: 0.4rem;
@@ -187,6 +187,7 @@ overflow-y: auto;
 background-color: #f0efeb;
 width: 60%;
 margin: 0 auto;
+margin-top: 10px;
 border-radius: 0.5rem;
 }
 .extra-display p{
@@ -339,4 +340,47 @@ font-size: small;
 padding-inline: 1rem;
 border-radius: 0.5rem;
 margin-block-end: 10px;
+}
+.custom{
+  width: 70%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 5px;
+}
+.custom input{
+  font-size: larger;
+  font-weight: bolder;
+  color: #B3C5F8;
+  width: 70%;
+  height: 30px;
+  padding-inline-start:0.3rem ;
+  padding-block: 0.5rem;
+  outline: none;
+  border: none;
+  border-radius: 0.2rem;
+  margin-bottom: 5px;
+  background-color: rgb(137, 132, 151);
+}
+.custom input::placeholder{
+  color: rgb(255, 208, 0);
+font-weight: bolder;
+font-size: large;
+font-style: oblique;
+}
+.custom button{
+  color: #B3C5F8;
+  font-size:0.9rem;
+  font-weight: bolder;
+  width: 30%;
+  background: linear-gradient(to right, #3190E1 , #A26CC0 );
+  padding-block: 0.7rem;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+}
+.general_error{
+  color: red;
 }

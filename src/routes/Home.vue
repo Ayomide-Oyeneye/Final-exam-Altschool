@@ -1,78 +1,66 @@
 <template>
+  <div class="url-place">
+    <h1>Latest URLs</h1>
 
-<div class="url-place">
-
-<!-- CENTER TEXT -->
-<h1>Latest URLs</h1>
-
-<!-- SHORTNER-AREA-->
-<div class="shortner-area">
-  <div class="shortner">
-    <input type="url" v-model="longUrl" placeholder="paste in your urls">
-    <button @click="shortenUrl" :disabled="loading">Shorten URL</button>
-  </div>
-  <br>
-  <div class="extra-display">
-    <div class="load" v-if="loading"><img class="load-text" src="../images/icons8-loading-infinity.gif" alt="">
-    </div>
-    <p v-else-if="shortenedUrl && !error">
-
-    <div class="url-link-2">
-      <span class="url-div">
-        <img width="42" height="42" src="https://img.icons8.com/cute-clipart/32/link.png" alt="link" /> Shortened
-        URL:
-      </span>
-      <a class="url-fetch" :href="shortenedUrl" :style="{ color: '#36AE7C', fontSize: 'xx-large' }"
-        @click="handleShortenedUrlClick">{{ shortenedUrl }}
-      </a>
-    </div>
-    <div class="click-area">
-      <a class="copy-button2" :href="shortenedUrl"><img width="38" height="38"
-          src="https://img.icons8.com/clouds/32/domain.png" alt="domain" />Visit url</a>
-      <button @click="copyToClipboard(shortenedUrl)" class="copy-button">
-        <img width="26" height="26" src="https://img.icons8.com/ios-filled/50/clipboard.png" alt="clipboard" />
-        copy
-      </button>
-      <!-- <button @click="generateQRCode(shortenedUrl)" class="generate-qr-button">Generate QR Code</button> -->
-      <!-- <div class="qr-code-container" v-if="shortenedUrl"> -->
-      <div class="qr-code-container">
-        <img :src="`https://api.qrserver.com/v1/create-qr-code/?data=${shortenedUrl}&size=63x63`" alt="QR Code">
+    <!-- SHORTNER-AREA-->
+    <div class="shortner-area">
+      <div class="shortner">
+        <input type="url" v-model="longUrl" placeholder="Paste in your URLs">
+        <button @click="shortenUrl" :disabled="loading">Shorten URL</button>
       </div>
-    </div>
-    </p>
-    <div v-else-if="error">{{ error }}</div>
+  <!-- CUSTOM URL FINALLY -->
+  <div v-if="shortenedUrl" class="custom">
+        <input type="text" v-model="customAlias" placeholder="Customize-URL (optional)">
+        <button @click="generateAlias" :disabled="loading">Generate Alias</button>
+      </div>
+      <div class="extra-display">
+        <div class="load" v-if="loading">
+          <img class="load-text" src="../images/icons8-loading-infinity.gif" alt="Loading">
+        </div>
 
+        <!-- Display shortened URL -->
+        <p v-else-if="shortenedUrl && !error">
+          <div class="url-link-2">
+            <span class="url-div">
+              <img width="42" height="42" src="https://img.icons8.com/cute-clipart/32/link.png" alt="Link" /> Shortened URL:
+            </span>
+            <a class="url-fetch" :href="shortenedUrl" :style="{ color: '#36AE7C', fontSize: 'xx-large' }"
+              @click="handleShortenedUrlClick">{{ shortenedUrl }}</a>
+          </div>
+          <!-- QR Code and other options -->
+          <div class="click-area">
+            <a class="copy-button2" :href="shortenedUrl">
+              <img width="38" height="38" src="https://img.icons8.com/clouds/32/domain.png" alt="Domain" /> Visit URL
+            </a>
+            <button @click="copyToClipboard(shortenedUrl)" class="copy-button">
+              <img width="26" height="26" src="https://img.icons8.com/ios-filled/50/clipboard.png" alt="Clipboard" /> Copy
+            </button>
+            <div class="qr-code-container">
+              <img :src="`https://api.qrserver.com/v1/create-qr-code/?data=${shortenedUrl}&size=63x63`" alt="QR Code">
+            </div>
+          </div>
+        </p>
+
+        <!-- Display error message if any -->
+        <div class="general_error" v-else-if="error">{{ error }}</div>
+      </div>
+      
+    </div>
   </div>
-</div>
-</div>
-
-  <!-- FOOTER OF THE PAGE -->
-
-  <footer class="footer">
-    <p>Term of Service | Security | 2024 Scissors</p>
-    <div class="footer-img">
-      <img src="../images/i.fi-social-facebook.png" alt="">
-      <img src="../images/i.fi-social-twitter.png" alt="">
-      <img src="../images/i.fi-social-linkedin.png" alt="">
-      <img src="../images/svg.feather.png" alt="">
-    </div>
-  </footer>
 </template>
 
 <script>
+import { logEvent, analytics, auth, onAuthStateChanged, signOut } from ".././firebase";
 import VueQrcode from 'vue-qrcode';
-import { logEvent,analytics,auth, onAuthStateChanged, signOut } from ".././firebase";
-import Analytics from '../components/Analytics.vue';
-
 
 export default {
   components: {
-    VueQrcode,
-    Analytics
+    VueQrcode
   },
   data() {
     return {
       longUrl: '',
+      customAlias: '',
       shortenedUrl: '',
       error: '',
       loading: false
@@ -120,117 +108,59 @@ export default {
         this.loading = false;
       }
     },
-    copyToClipboard(text) {
+    async generateAlias() {
+      this.loading = true;
+      let apiUrl = `https://tinyurl.com/api-create.php?url=${encodeURIComponent(this.longUrl)}`;
+      if (this.customAlias) {
+        apiUrl += `&alias=${encodeURIComponent(this.customAlias)}`;
+      }
+
+      try {
+        const response = await fetch(apiUrl);
+        if (response.ok) {
+          const alias = await response.text();
+          this.shortenedUrl = alias;
+          this.error = '';
+          // Log the event when an alias is generated
+          logEvent(analytics, 'generate_alias', {
+            longUrl: this.longUrl,
+            customAlias: this.customAlias,
+            alias: this.shortenedUrl
+          });
+        } else {
+          throw new Error('Failed to generate alias');
+        }
+      } catch (error) {
+        console.error('Error generating alias:', error);
+        this.error = 'Alias is not available.';
+      } finally {
+        this.loading = false;
+      }
+    },
+    handleShortenedUrlClick() {
+      // Handle the click event for the shortened URL
+      // You can add any other logic here
+    },
+    copyToClipboard(url) {
       const input = document.createElement('input');
-      input.value = text;
+      input.value = url;
       document.body.appendChild(input);
       input.select();
       document.execCommand('copy');
       document.body.removeChild(input);
       // Log the event when the URL is copied to the clipboard
       logEvent(analytics, 'copy_url', {
-        shortenedUrl: text
+        shortenedUrl: url
       });
     },
-    signOutUser() {
-      signOut(auth).then(() => {
-        // Sign-out successful
-        logEvent(analytics, 'user_sign_out', { status: 'success' });
-      }).catch((error) => {
-        // An error happened
-        logEvent(analytics, 'user_sign_out', { status: 'error', error: error.message });
-      });
+    generateQRCodeUrl(url) {
+      return `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(url)}&size=100x100`;
     }
   }
 };
 </script>
-
-
-<!-- <template>
-  <div class="url-place">
-    <h1>Latest URLs</h1>
-
-    <div class="shortner-area">
-      <div class="shortner">
-        <input type="url" v-model="longUrl" placeholder="Paste in your URLs">
-        <button @click="shortenUrl" :disabled="loading">Shorten URL</button>
-      </div>
-
-      <div class="extra-display">
-        <div class="load" v-if="loading">
-          <img class="load-text" src="../images/icons8-loading-infinity.gif" alt="Loading">
-        </div>
-
-        <p v-else-if="shortenedUrl && !error">
-          <div class="url-link-2">
-            <span class="url-div">
-              <img width="42" height="42" src="https://img.icons8.com/cute-clipart/32/link.png" alt="Link" /> Shortened URL:
-            </span>
-            <a class="url-fetch" :href="shortenedUrl" :style="{ color: '#36AE7C', fontSize: 'xx-large' }"
-               @click="handleShortenedUrlClick">{{ shortenedUrl }}</a>
-          </div>
-
-          <div class="click-area">
-            <a class="copy-button2" :href="shortenedUrl">
-              <img width="38" height="38" src="https://img.icons8.com/clouds/32/domain.png" alt="Domain" /> Visit URL
-            </a>
-            <button @click="copyToClipboard(shortenedUrl)" class="copy-button">
-              <img width="26" height="26" src="https://img.icons8.com/ios-filled/50/clipboard.png" alt="Clipboard" /> Copy
-            </button>
-          </div>
-        </p>
-
-        <div v-else-if="error">{{ error }}</div>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script>
-import { ref } from 'vue';
-import { logEvent } from 'firebase/analytics'; // Import Firebase Analytics
-
-export default {
-  data() {
-    return {
-      longUrl: '',
-      shortenedUrl: '',
-      loading: false,
-      error: null,
-    };
-  },
-  methods: {
-    async shortenUrl() {
-      // Your logic for shortening the URL
-      // ...
-
-      // Simulate loading
-      this.loading = true;
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // Set the shortened URL (replace with actual shortened URL)
-      this.shortenedUrl = 'https://scissor.app/abc123';
-
-      // Track the event when a URL is shortened
-      this.trackShortenedUrlClick(this.shortenedUrl);
-
-      this.loading = false;
-    },
-    handleShortenedUrlClick() {
-      // Handle the click event for the shortened URL
-      // You can add any other logic here
-    },
-    trackShortenedUrlClick(shortenedUrl) {
-      // Track the event when a user clicks the shortened URL
-      logEvent(this.$analytics, 'shortened_url_clicked', {
-        url: shortenedUrl,
-      });
-    },
-    copyToClipboard(url) {
-      // Your logic for copying to clipboard
-      // ...
-    },
-  },
-};
-</script>
- -->
+<!--   CUSTOM URL FINALLY 
+<div v-if="shortenedUrl" class="custom">
+  <input type="text" v-model="customAlias" placeholder="Customize-URL (optional)">
+  <button @click="generateAlias" :disabled="loading">Generate Alias</button>
+</div> -->

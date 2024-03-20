@@ -58,5 +58,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Credits
 
-This project was created by [Oyeneye Ayomide] and is licensed under the MIT License.
+This project was created by [Oyeneye Ayomide].
 

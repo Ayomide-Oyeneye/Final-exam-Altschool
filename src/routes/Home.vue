@@ -48,6 +48,17 @@
 
     </div>
   </div>
+    <!-- FOOTER OF THE PAGE -->
+
+    <footer class="footer">
+    <p>Term of Service | Security | 2024 Scissors</p>
+    <div class="footer-img">
+      <img src="../images/i.fi-social-facebook.png" alt="">
+      <img src="../images/i.fi-social-twitter.png" alt="">
+      <img src="../images/i.fi-social-linkedin.png" alt="">
+      <img src="../images/svg.feather.png" alt="">
+    </div>
+  </footer>
 </template>
 
 <script>

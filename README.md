@@ -1,25 +1,6 @@
-<!-- # ass-finale-exam
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/). -->
 # URL Shortener
 
-This is a simple Vue.js application for shortening URLs using TinyURL's API.
+This is a simple Vue.js application for shortening URLs using TinyURL's API. It allows users to paste their URLs, shorten them instantly, and optionally customize the alias for the shortened URL.
 
 ## Usage
 
@@ -31,15 +12,17 @@ This is a simple Vue.js application for shortening URLs using TinyURL's API.
 ## Features
 
 - Paste in your URLs and shorten them instantly.
+- Customize the alias for the shortened URL.
 - Copy the shortened URL with one click.
 - Visit the original URL directly from the application.
+- Display QR code for the shortened URL.
 - Track user authentication status and URL shortening events with Firebase Analytics.
 
 ## Technologies Used
 
 - Vue.js
-- Firebase (for authentication and analytics)
 - TinyURL API
+- Firebase (for authentication and analytics)
 
 ## How to Contribute
 
@@ -58,5 +41,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Credits
 
-This project was created by [Oyeneye Ayomide].
-
+This project was created by Oyeneye Ayomide Finifoluwa.
